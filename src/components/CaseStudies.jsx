@@ -43,7 +43,7 @@ export default function CaseStudies() {
     <section className="case-studies section">
       <div className="case-header" style={{ justifyContent: 'flex-end' }}>
         <Reveal direction="left">
-          <h2 className="case-main-title">Explore Our Case Studies</h2>
+          <h2 className="case-main-title">Patient Reviews</h2>
         </Reveal>
       </div>
 
@@ -52,16 +52,16 @@ export default function CaseStudies() {
           <div className="case-main-card">
             <div className="case-card-top">
               <div>
-                <h3>Revolutionizing Healthcare:<br/>The Story of MedTech Innovations</h3>
-                <p className="case-desc">Follow the journey of MedTech Innovations, a pioneering startup dedicated to revolutionizing the healthcare industry.</p>
+                <h3>Exceptional Eye Care:<br/>My Experience at Shaureen</h3>
+                <p className="case-desc">"I visited Dr. Shamik Ambatkar for a vitreo-retinal consultation and the experience was flawless. The advanced equipment and caring staff made me feel completely at ease."</p>
               </div>
             </div>
             
-            <img className="case-hero-img" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=800" alt="MedTech Innovations" />
+            <img className="case-hero-img" src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=800" alt="Happy Patient" />
             
             <div className="case-stats">
               <div className="stat-pill">
-                3k <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                5/5 <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" style={{color: '#FFD700'}} width="20" height="20"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
               </div>
               <button className="icon-btn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 15l-3 3-3-3V3h6v12z"></path></svg>
@@ -88,29 +88,29 @@ export default function CaseStudies() {
         <Reveal direction="up" delay={300} className="case-right">
           <div className="case-carousel" ref={carouselRef} onScroll={handleScroll}>
              <div className="small-case-card light-green">
-               <h4>From Dorm Room<br/>to Boardroom</h4>
+               <h4>"Best Eye<br/>Hospital in Nagpur"</h4>
                <div className="circle-cutout">
-                 <img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&q=80&w=200" alt="Startup founder" />
+                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200" alt="Patient" />
                </div>
              </div>
              <div className="small-case-card orange-bg">
                <img className="card-bg-img" src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&q=80&w=400" alt="Pink abstract" />
                <div className="glass-content">
-                 <h4>The Journey of Eco-<br/>Friendly Startup Solutions</h4>
+                 <h4>"Dr. Shamik's diagnosis<br/>was precise and helpful."</h4>
                </div>
              </div>
              <div className="small-case-card green-bg">
                <img className="card-bg-img" src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=400" alt="Green abstract" />
                <div className="glass-content">
-                 <h4>The Impact...<br/>Entrepreneur...</h4>
+                 <h4>"The surgery was a success.<br/>Highly Recommended!"</h4>
                </div>
              </div>
           </div>
           
           <div className="case-info">
-             <p>Discover a treasure trove of success stories and insightful case studies that illuminate the journey of innovation and entrepreneurship. From groundbreaking startups to industry-disrupting strategies, dive into real-world examples that inspire, inform, and guide.</p>
+             <p>Read what our happy patients have to say about their experience with Shaureen Advanced Eye Care. From routine check-ups to complex retinal surgeries, our commitment to excellence shines through their stories.</p>
              <a href="#" className="explore-link">
-               Explore In Details 
+               Read More Reviews 
                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
              </a>
           </div>

@@ -21,18 +21,18 @@ export default function Services() {
           </div>
           <div className="glass-panel">
             <div className="glass-top">
-               <span className="pill-badge">Our Service</span>
+               <span className="pill-badge">Chief Surgeon</span>
                <button className="heart-btn">
                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                </button>
             </div>
             <div className="glass-middle">
-               <h3>1001</h3>
-               <h4>growth hacking cases</h4>
-               <p>Dive into Our Treasury of Success Stories and Case Studies<br/>To Get Insights for Your Own Startup</p>
+               <h3>Dr. Shamik</h3>
+               <h4>A. Ambatkar</h4>
+               <p>MBBS, DNB (Ophthalmology)<br/>Vitreo-Retinal Surgeon. Leading specialist in advanced eye surgeries.</p>
             </div>
             <div className="glass-bottom">
-               <span className="price">$ 200</span> <span className="price-unit">/ full access</span>
+               <span className="price">22+</span> <span className="price-unit">/ years experience</span>
             </div>
           </div>
         </Reveal>
@@ -45,23 +45,23 @@ export default function Services() {
           <div className="glass-panel">
             <div className="glass-top">
                <div className="vertical-avatars">
-                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100" alt="Av 1" />
-                 <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=100" alt="Av 2" />
-                 <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=100" alt="Av 3" />
+                 <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=100" alt="Av 1" />
+                 <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=100" alt="Av 2" />
+                 <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=100" alt="Av 3" />
                  <button className="add-btn">+</button>
                </div>
-               <span className="pill-badge">Our Service</span>
+               <span className="pill-badge">Specialized Care</span>
                <button className="heart-btn">
                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                </button>
             </div>
             <div className="glass-middle">
-               <h3>40</h3>
-               <h4>experts</h4>
-               <p>Meet Our Panel of Visionaries and Innovators Who are<br/>Here to Help Your Grow Your Startup</p>
+               <h3>Expert</h3>
+               <h4>Optometrists</h4>
+               <p>Our panel of highly skilled eye specialists provides detailed consultations and personalized treatment plans.</p>
             </div>
             <div className="glass-bottom">
-               <span className="price">$ 100</span> <span className="price-unit">/ one query</span>
+               <span className="price-unit">Dedicated to your vision</span>
             </div>
           </div>
         </Reveal>
