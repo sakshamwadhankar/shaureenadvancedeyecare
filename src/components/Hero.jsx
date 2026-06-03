@@ -31,7 +31,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="hero-background-shape" style={{ zIndex: 0 }}></div>
     </FadeInUp>
   );
 }
