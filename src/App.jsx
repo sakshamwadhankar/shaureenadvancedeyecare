@@ -8,6 +8,7 @@ import CaseStudies from './components/CaseStudies';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { ScrollBackground } from './components/ui/svg-follow-scroll';
+import NeuralBackground from './components/ui/flow-field-background';
 
 import { Agentation } from 'agentation';
 
@@ -20,6 +21,7 @@ function App() {
       <main>
         <Hero />
         <div ref={scrollRef} style={{ position: 'relative' }}>
+          <NeuralBackground color="#004e89" trailOpacity={0.15} speed={0.3} particleCount={100} />
           <ScrollBackground containerRef={scrollRef} />
           <WhyUs />
           <Services />
