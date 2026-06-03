@@ -1,9 +1,10 @@
 :root {
-    --bg-color: #FAFAFA;
+    --bg-color: #f3f6ff;
     --text-primary: #1A1A1A;
-    --text-secondary: #666666;
-    --accent-pink: #FFB5C5;
-    --accent-peach: #FFDAB9;
+    --text-secondary: #4b5563;
+    --accent-main: #3770bf;
+    --accent-light: #8dc2ff;
+    --accent-bright: #cef26d;
     --card-bg: #FFFFFF;
     --radius-lg: 24px;
     --radius-xl: 40px;
@@ -39,7 +40,7 @@ h1, h2, h3 {
     justify-content: space-between;
     align-items: center;
     padding: 24px 5%;
-    background: rgba(250, 250, 250, 0.8);
+    background: rgba(243, 246, 255, 0.8);
     backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
@@ -112,8 +113,11 @@ h1, h2, h3 {
 .hero {
     text-align: center;
     position: relative;
-    padding-top: 100px;
-    padding-bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 90px);
 }
 
 .badge {
@@ -137,7 +141,7 @@ h1, h2, h3 {
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    background: linear-gradient(135deg, var(--accent-main), var(--accent-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -225,7 +229,7 @@ h1, h2, h3 {
     transform: translateX(-50%);
     width: 60%;
     height: 300px;
-    background: linear-gradient(135deg, var(--accent-pink), var(--accent-peach));
+    background: linear-gradient(135deg, var(--accent-light), var(--bg-color));
     border-radius: 100px;
     filter: blur(80px);
     opacity: 0.5;
@@ -239,6 +243,13 @@ h1, h2, h3 {
 }
 
 /* Why Us Section - Bento Layout */
+.why-us {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
 .bento-container {
     display: flex;
     gap: 24px;
@@ -358,8 +369,8 @@ h1, h2, h3 {
 
 .bento-success {
     flex: 0 0 calc(40% - 12px);
-    background: linear-gradient(135deg, #B5D5A5, #88C28A);
-    color: white;
+    background: linear-gradient(135deg, var(--accent-bright), #bada55);
+    color: var(--text-primary);
     padding: 24px;
     display: flex;
     align-items: flex-end;
@@ -372,7 +383,7 @@ h1, h2, h3 {
 
 .bento-consult {
     flex: 0 0 calc(60% - 12px);
-    background: linear-gradient(135deg, #FFB5A7, #FF8A76);
+    background: linear-gradient(135deg, var(--accent-main), #2c5999);
     color: white;
     padding: 32px;
     display: flex;
@@ -483,8 +494,8 @@ h1, h2, h3 {
 .bento-materials {
     flex: 1;
     height: 100%;
-    background: linear-gradient(135deg, #FF9A9E, #FECFEF);
-    color: white;
+    background: linear-gradient(135deg, var(--accent-light), var(--bg-color));
+    color: var(--accent-main);
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -510,7 +521,7 @@ h1, h2, h3 {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: #EAF0E6;
+    background: var(--accent-bright);
     border: none;
     display: flex;
     align-items: center;
@@ -545,7 +556,7 @@ h1, h2, h3 {
 /* Features Card */
 .bento-features {
     height: 250px;
-    background: #EAF0E6;
+    background: #e6f0ff;
     display: flex;
     overflow: hidden;
 }
@@ -615,6 +626,13 @@ h1, h2, h3 {
 }
 
 /* Services Hub */
+.services-hub {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -671,7 +689,7 @@ h1, h2, h3 {
 }
 
 .card-peach {
-    background: linear-gradient(135deg, #FFB5C5, #FFDAB9);
+    background: linear-gradient(135deg, var(--accent-light), var(--accent-main));
     color: white;
 }
 
@@ -699,6 +717,13 @@ h1, h2, h3 {
 }
 
 /* Experts */
+.experts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
 .centered-title {
     text-align: center;
     font-size: 48px;
@@ -738,6 +763,13 @@ h1, h2, h3 {
 .pos-6 { bottom: 10%; left: 45%; width: 130px; height: 130px; }
 
 /* Case Studies */
+.case-studies {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
 .case-studies-scroll {
     display: flex;
     gap: 32px;
@@ -785,7 +817,11 @@ h1, h2, h3 {
 .contact-section {
     text-align: center;
     position: relative;
-    padding: 150px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 100px);
 }
 
 .huge-title {
@@ -800,7 +836,7 @@ h1, h2, h3 {
 .floating-shape {
     position: absolute;
     border-radius: var(--radius-xl);
-    background: linear-gradient(135deg, var(--accent-pink), var(--accent-peach));
+    background: linear-gradient(135deg, var(--accent-main), var(--accent-light));
     opacity: 0.6;
     z-index: 1;
     filter: blur(20px);
