@@ -9,7 +9,7 @@ export default function Experts() {
         Book Your Appointment<br/>
         <span style={{fontSize: '0.5em', fontWeight: 'normal'}}>Call us at 0712 2232005</span>
       </h2>
-      <div style={{ display: 'flex', justifyContent: 'center', width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%', margin: '0 auto' }}>
         <CalendarAppointmentBookingDemo />
       </div>
     </FadeInUp>
