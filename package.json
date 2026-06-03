@@ -1,0 +1,32 @@
+{
+  "name": "hospitalv2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fraagman/hospitalv2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fraagman/hospitalv2/issues"
+  },
+  "homepage": "https://github.com/Fraagman/hospitalv2#readme",
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "agentation": "^3.0.2",
+    "vite": "^8.0.16"
+  }
+}
