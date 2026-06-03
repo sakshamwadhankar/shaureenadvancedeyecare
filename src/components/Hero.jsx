@@ -1,6 +1,7 @@
 import React from 'react';
 import FadeInUp from './FadeInUp';
 import heroBg from '../hero-bg.jpg';
+import { Star } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -26,7 +27,13 @@ export default function Hero() {
             <div className="avatar-count">+10k</div>
           </div>
           <div className="hero-rating">
-            <div className="stars">★★★★★</div>
+            <div className="stars" style={{ display: 'flex', gap: '2px', color: '#FFD700' }}>
+              <Star size={16} fill="currentColor" stroke="none" />
+              <Star size={16} fill="currentColor" stroke="none" />
+              <Star size={16} fill="currentColor" stroke="none" />
+              <Star size={16} fill="currentColor" stroke="none" />
+              <Star size={16} fill="currentColor" stroke="none" />
+            </div>
             <p>4.9/5 (2k+ Happy Patients)</p>
           </div>
         </div>

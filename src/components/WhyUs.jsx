@@ -1,5 +1,6 @@
 import React from 'react';
 import Reveal from './Reveal';
+import { Eye, Stethoscope, Microscope, Hospital } from 'lucide-react';
 
 export default function WhyUs() {
   return (
@@ -43,9 +44,9 @@ export default function WhyUs() {
               <div className="consult-content">
                 <span className="hashtag">#care</span>
                 <div className="consult-icons">
-                  <div className="c-icon">👁️</div>
-                  <div className="c-icon active">🩺</div>
-                  <div className="c-icon">🔬</div>
+                  <div className="c-icon"><Eye size={20} /></div>
+                  <div className="c-icon active"><Stethoscope size={20} /></div>
+                  <div className="c-icon"><Microscope size={20} /></div>
                 </div>
                 <h3>Detailed Eye<br/>Exam & Diagnosis</h3>
                 <div className="dots">
@@ -96,8 +97,8 @@ export default function WhyUs() {
           <Reveal direction="up" delay={400} className="bento-card bento-features">
             <div className="features-content">
               <div className="features-tags">
-                <span className="f-tag">🔬</span>
-                <span className="f-tag">🏥</span>
+                <span className="f-tag"><Microscope size={16} /></span>
+                <span className="f-tag"><Hospital size={16} /></span>
               </div>
               <p className="f-subtitle">World-class Medical Care</p>
               <h3>Advanced Diagnostics<br/>& Precision Care</h3>
