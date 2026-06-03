@@ -22,9 +22,6 @@ export default function Services() {
           <div className="glass-panel">
             <div className="glass-top">
                <span className="pill-badge">Chief Surgeon</span>
-               <button className="heart-btn">
-                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-               </button>
             </div>
             <div className="glass-middle">
                <h3>Dr. Shamik</h3>
@@ -44,16 +41,7 @@ export default function Services() {
           </div>
           <div className="glass-panel">
             <div className="glass-top">
-               <div className="vertical-avatars">
-                 <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=100" alt="Av 1" />
-                 <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=100" alt="Av 2" />
-                 <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=100" alt="Av 3" />
-                 <button className="add-btn">+</button>
-               </div>
                <span className="pill-badge">Specialized Care</span>
-               <button className="heart-btn">
-                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-               </button>
             </div>
             <div className="glass-middle">
                <h3>Expert</h3>

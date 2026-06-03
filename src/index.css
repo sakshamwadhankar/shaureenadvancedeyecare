@@ -1019,12 +1019,13 @@ h1, h2, h3 {
     font-size: 32px;
     line-height: 1.2;
     margin-bottom: 16px;
+    max-width: 38%;
 }
 
 .case-desc {
     font-size: 16px;
     color: var(--text-secondary);
-    max-width: 80%;
+    max-width: 38%;
 }
 
 .circle-arrow {
