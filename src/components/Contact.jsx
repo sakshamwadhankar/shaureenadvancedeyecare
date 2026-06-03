@@ -14,7 +14,7 @@ export default function Contact() {
         </div>
         <div className="contact-map" style={{flex: 1, borderRadius: '24px', overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.05)'}}>
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119066.41709424707!2d79.00213898142345!3d21.16108593452636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c0a5a31faf13%3A0x19b37d06d0bb3e2b!2sNagpur%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1716301234567!5m2!1sen!2sin" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.8300525029094!2d79.0721942!3d21.1193406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4bf7d90b36bad%3A0x3f87003e58fdaca2!2sShaureen%20Advanced%20Eye%20Care!5e0!3m2!1sen!2sin!4v1716301234567!5m2!1sen!2sin" 
             width="100%" 
             height="100%" 
             style={{border: 0, minHeight: '100%'}} 

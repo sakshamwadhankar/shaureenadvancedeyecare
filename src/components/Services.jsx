@@ -1,5 +1,7 @@
 import React from 'react';
 import Reveal from './Reveal';
+import drImg from '../img/R-1.jpg';
+import optImg from '../img/67133d513112ae5e0ebf734286fcf2e8.png';
 
 export default function Services() {
   return (
@@ -17,19 +19,14 @@ export default function Services() {
         {/* Left Card */}
         <Reveal direction="right" delay={200} className="services-card green-theme">
           <div className="services-card-bg-wrapper">
-             <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=800" alt="Green texture" />
+             <img src={drImg} alt="Dr. Shamik Ambatkar" />
           </div>
           <div className="glass-panel">
             <div className="glass-top">
                <span className="pill-badge">Chief Surgeon</span>
             </div>
             <div className="glass-middle">
-               <h3>Dr. Shamik</h3>
-               <h4>A. Ambatkar</h4>
-               <p>MBBS, DNB (Ophthalmology)<br/>Vitreo-Retinal Surgeon. Leading specialist in advanced eye surgeries.</p>
-            </div>
-            <div className="glass-bottom">
-               <span className="price">22+</span> <span className="price-unit">/ years experience</span>
+               <h3 className="card-doctor-name">Dr. Shamik Ambatkar</h3>
             </div>
           </div>
         </Reveal>
@@ -37,19 +34,14 @@ export default function Services() {
         {/* Right Card */}
         <Reveal direction="left" delay={300} className="services-card peach-theme">
           <div className="services-card-bg-wrapper">
-             <img src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&q=80&w=800" alt="Peach texture" />
+              <img src={optImg} alt="Expert Optometrists" />
           </div>
           <div className="glass-panel">
             <div className="glass-top">
                <span className="pill-badge">Specialized Care</span>
             </div>
             <div className="glass-middle">
-               <h3>Expert</h3>
-               <h4>Optometrists</h4>
-               <p>Our panel of highly skilled eye specialists provides detailed consultations and personalized treatment plans.</p>
-            </div>
-            <div className="glass-bottom">
-               <span className="price-unit">Dedicated to your vision</span>
+               <h3 className="card-doctor-name">Expert Optometrists</h3>
             </div>
           </div>
         </Reveal>
