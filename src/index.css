@@ -105,8 +105,14 @@ h1, h2, h3 {
     gap: 8px;
 }
 
+.nav-spacer {
+    flex: 1;
+}
+
 .nav-links {
+    flex: 1;
     display: flex;
+    justify-content: center;
     list-style: none;
     gap: 32px;
 }
@@ -123,7 +129,9 @@ h1, h2, h3 {
 }
 
 .nav-icons {
+    flex: 1;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     gap: 16px;
 }
