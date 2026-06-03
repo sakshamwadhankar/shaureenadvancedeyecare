@@ -1,10 +1,12 @@
 import React from 'react';
 import FadeInUp from './FadeInUp';
+import heroBg from '../hero-bg.jpg';
 
 export default function Hero() {
   return (
-    <FadeInUp as="header" className="hero section">
-      <div className="hero-content">
+    <FadeInUp as="header" className="hero section" style={{ backgroundImage: `url(${heroBg})`, backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
+      <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(255, 255, 255, 0.5)', zIndex: 0 }}></div>
+      <div className="hero-content" style={{ position: 'relative', zIndex: 1 }}>
         <div className="badge">World-class Vitreo-Retinal Care</div>
         <h1 className="hero-title">
           Shaureen Advanced <br /> Eye Care <br />
@@ -29,7 +31,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="hero-background-shape"></div>
+      <div className="hero-background-shape" style={{ zIndex: 0 }}></div>
     </FadeInUp>
   );
 }

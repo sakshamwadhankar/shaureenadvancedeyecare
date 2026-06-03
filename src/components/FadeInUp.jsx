@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export default function FadeInUp({ children, className = "", as: Component = "div" }) {
+export default function FadeInUp({ children, className = "", as: Component = "div", ...props }) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -19,7 +19,7 @@ export default function FadeInUp({ children, className = "", as: Component = "di
   }, []);
 
   return (
-    <Component ref={ref} className={`fade-in-up ${isVisible ? 'visible' : ''} ${className}`}>
+    <Component ref={ref} className={`fade-in-up ${isVisible ? 'visible' : ''} ${className}`} {...props}>
       {children}
     </Component>
   );
