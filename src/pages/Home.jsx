@@ -4,8 +4,6 @@ import WhyUs from '../components/WhyUs';
 import Services from '../components/Services';
 import Experts from '../components/Experts';
 import CaseStudies from '../components/CaseStudies';
-import Contact from '../components/Contact';
-import CalendarSection from '../components/CalendarSection';
 import { ScrollBackground } from '../components/ui/svg-follow-scroll';
 import NeuralBackground from '../components/ui/flow-field-background';
 
@@ -22,8 +20,6 @@ export default function Home() {
         <Services />
         <Experts />
         <CaseStudies />
-        <Contact />
-        <CalendarSection />
       </div>
     </main>
   );
