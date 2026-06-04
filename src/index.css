@@ -726,7 +726,7 @@ h1, h2, h3 {
     overflow: hidden;
     height: 600px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
 }
 
@@ -779,6 +779,22 @@ h1, h2, h3 {
     justify-content: space-between;
     color: white;
     text-align: center;
+}
+
+.services-card .glass-panel {
+    height: auto;
+    margin-bottom: 30px;
+    padding: 20px;
+    gap: 12px;
+}
+
+.card-doctor-name {
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    color: white;
+    margin-top: 8px;
+    font-family: 'Philosopher', sans-serif;
+    letter-spacing: normal !important;
 }
 
 .glass-content {
