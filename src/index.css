@@ -1315,18 +1315,312 @@ h1, h2, h3 {
     animation: float 6s ease-in-out infinite reverse;
 }
 
-.footer {
-    padding: 40px 5%;
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid #EAEAEA;
-    color: var(--text-secondary);
+/* ========================================
+   SITE FOOTER — Agio-inspired
+   ======================================== */
+.site-footer {
+    position: relative;
+    background: #3770bf;
+    color: #f3f6ff;
+    padding: 80px 5% 0;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
 }
 
-.footer-links a {
-    color: var(--text-secondary);
+/* Watermark */
+.footer-watermark {
+    position: absolute;
+    bottom: 40px;
+    right: -20px;
+    font-family: 'Philosopher', serif;
+    font-size: clamp(120px, 18vw, 280px);
+    font-weight: 700;
+    color: #8dc2ff;
+    opacity: 0.1;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    z-index: 0;
+}
+
+/* Main Grid */
+.footer-main {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr 1.3fr;
+    gap: 48px;
+    padding-bottom: 64px;
+}
+
+/* Column Titles */
+.footer-col-title {
+    font-family: 'Philosopher', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #f3f6ff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 28px;
+    position: relative;
+}
+
+.footer-col-title::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: #cef26d;
+    margin-top: 12px;
+    border-radius: 2px;
+}
+
+/* Link Lists */
+.footer-link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-link-list li a {
+    color: #8dc2ff;
     text-decoration: none;
-    margin-left: 24px;
+    font-size: 15px;
+    font-weight: 400;
+    transition: color 0.25s ease, padding-left 0.25s ease;
+    display: inline-block;
+}
+
+.footer-link-list li a:hover {
+    color: #f3f6ff;
+    padding-left: 6px;
+}
+
+/* Map Column */
+.footer-map-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    line-height: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.footer-map-wrapper iframe {
+    filter: saturate(0.85) contrast(1.05);
+}
+
+.footer-contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-contact-details p {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #8dc2ff;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.footer-contact-details p svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #cef26d;
+}
+
+/* Newsletter */
+.footer-newsletter-desc {
+    color: #8dc2ff;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.footer-newsletter-form {
+    display: flex;
+    gap: 0;
+}
+
+.footer-email-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(141, 194, 255, 0.3);
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    padding: 14px 16px;
+    color: #f3f6ff;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.footer-email-input::placeholder {
+    color: rgba(141, 194, 255, 0.6);
+}
+
+.footer-email-input:focus {
+    border-color: #cef26d;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.footer-subscribe-btn {
+    background: #cef26d;
+    color: #3770bf;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.footer-subscribe-btn:hover {
+    background: #d9f57e;
+    transform: translateY(-1px);
+}
+
+.footer-subscribe-btn:active {
+    transform: translateY(0);
+}
+
+/* Bottom Bar */
+.footer-bottom-bar {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(141, 194, 255, 0.25);
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-copyright {
+    font-size: 13px;
+    color: #8dc2ff;
+    margin: 0;
+}
+
+.footer-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.footer-policy-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-policy-links a {
+    color: #8dc2ff;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.25s ease;
+}
+
+.footer-policy-links a:hover {
+    color: #f3f6ff;
+}
+
+.footer-divider {
+    color: rgba(141, 194, 255, 0.4);
+    font-size: 13px;
+}
+
+.footer-social-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #8dc2ff;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.footer-social-link:hover {
+    background: #cef26d;
+    color: #3770bf;
+    transform: translateY(-2px);
+}
+
+/* Footer Responsive */
+@media (max-width: 1024px) {
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .footer-watermark {
+        font-size: clamp(80px, 14vw, 160px);
+        bottom: 30px;
+    }
+}
+
+@media (max-width: 640px) {
+    .site-footer {
+        padding: 56px 5% 0;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding-bottom: 48px;
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 24px 0;
+    }
+
+    .footer-bottom-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .footer-watermark {
+        font-size: 80px;
+        bottom: 20px;
+        right: -10px;
+    }
+
+    .footer-newsletter-form {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .footer-email-input {
+        border-right: 1px solid rgba(141, 194, 255, 0.3);
+        border-radius: 10px;
+    }
+
+    .footer-subscribe-btn {
+        border-radius: 10px;
+    }
 }
 
 /* Animations */

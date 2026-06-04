@@ -1,6 +1,6 @@
 import React from 'react';
-import Reveal from './Reveal';
 import { Link } from 'react-router-dom';
+import Reveal from './Reveal';
 import drImg from '../img/R-1.jpg';
 import optImg from '../img/67133d513112ae5e0ebf734286fcf2e8.png';
 
