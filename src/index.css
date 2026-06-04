@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 @theme {
   --color-border: hsl(var(--border));
@@ -2785,3 +2785,16 @@ h1, h2, h3 {
     .dp2-hero-cta-row { flex-direction: column; align-items: flex-start; }
     .dp2-hero-quals-line { flex-direction: column; }
 }
+
+/* Book Appointment - Custom Animations */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
