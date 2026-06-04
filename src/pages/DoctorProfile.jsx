@@ -1,179 +1,200 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ChevronLeft, Mail, Phone, MapPin, Clock, Award,
-  ArrowUpRight, GraduationCap, Stethoscope, Eye,
-  Users, Building2, Zap,
+  ChevronLeft, ChevronDown, Phone, MapPin, Award,
+  GraduationCap, Eye, BookOpen, Presentation, Users,
+  Building2, Zap, Globe, Star, Calendar, Briefcase,
+  FileText, Mic, Shield,
 } from 'lucide-react';
 import { doctors } from '../data/doctors';
+import drImg from '../img/R-1.jpg';
 
-/* ─────────────────────────────────────────────────────
-   Inline styles — high specificity, no Tailwind clashes
-   ───────────────────────────────────────────────────── */
-const S = {
-  page: {
-    minHeight: '100vh',
-    backgroundColor: '#f3f6ff',
-    color: '#1A1A1A',
-    fontFamily: "'Inter', sans-serif",
-    paddingTop: '100px',
-    overflowX: 'hidden',
-  },
-  wrap: { maxWidth: '1400px', margin: '0 auto', padding: '0 48px' },
-  backLink: {
-    display: 'inline-flex', alignItems: 'center', gap: '8px',
-    color: '#6b7280', textDecoration: 'none', fontWeight: 600,
-    fontSize: '14px', padding: '10px 20px', borderRadius: '999px',
-    border: '1px solid #e5e7eb', backgroundColor: '#fff',
-    transition: 'all 0.2s ease', marginBottom: '40px',
-  },
-
-  /* ── Hero ── */
-  heroGrid: {
-    display: 'grid', gridTemplateColumns: '1fr 1fr',
-    gap: '48px', alignItems: 'center', minHeight: '560px',
-  },
-  heroLeft: {
-    display: 'flex', flexDirection: 'column',
-    justifyContent: 'center', gap: '32px',
-  },
-  heroTitle: {
-    fontFamily: "'Philosopher', sans-serif",
-    fontSize: 'clamp(48px, 6vw, 96px)', fontWeight: 900,
-    lineHeight: 0.95, letterSpacing: '-3px', color: '#1A1A1A', margin: 0,
-  },
-  heroDesc: {
-    fontSize: '18px', lineHeight: 1.7, color: '#6b7280',
-    maxWidth: '520px', fontWeight: 500,
-  },
-
-  /* ── Stats ── */
-  statsRow: { display: 'flex', gap: '24px', marginTop: '8px' },
-  statCard: {
-    display: 'flex', alignItems: 'center', gap: '16px',
-    backgroundColor: '#fff', borderRadius: '20px',
-    padding: '20px 28px', flex: 1,
-    boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
-    border: '1px solid #f0f0f0',
-  },
-  statIconBox: {
-    width: '56px', height: '56px', borderRadius: '16px',
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    flexShrink: 0,
-  },
-  statNum: {
-    fontFamily: "'Philosopher', sans-serif", fontSize: '36px',
-    fontWeight: 900, lineHeight: 1, color: '#1A1A1A', margin: 0,
-  },
-  statLabel: {
-    fontSize: '12px', color: '#9ca3af', fontWeight: 600,
-    textTransform: 'uppercase', letterSpacing: '0.5px',
-    marginTop: '2px', lineHeight: 1.3,
-  },
-
-  /* ── Hero Image ── */
-  imgWrap: {
-    display: 'flex', justifyContent: 'flex-end',
-    alignItems: 'center', position: 'relative',
-  },
-  imgContainer: {
-    width: '100%', maxWidth: '480px', aspectRatio: '3/4',
-    borderRadius: '32px', overflow: 'hidden',
-    backgroundColor: '#3770bf', position: 'relative',
-    boxShadow: '0 40px 80px rgba(55,112,191,0.25)',
-  },
-  img: {
-    width: '100%', height: '100%',
-    objectFit: 'cover', objectPosition: 'top',
-  },
-  imgBadge: {
-    position: 'absolute', bottom: '24px', left: '24px', right: '24px',
-    backgroundColor: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(20px)',
-    borderRadius: '20px', padding: '20px 24px',
-    display: 'flex', alignItems: 'center', gap: '16px',
-  },
-
-  /* ── Bento Grid ── */
-  bento: {
-    display: 'grid', gap: '20px',
-    gridTemplateColumns: 'repeat(12, 1fr)',
-    gridAutoRows: 'minmax(80px, auto)',
-  },
-  bentoCard: {
-    backgroundColor: '#fff', borderRadius: '24px',
-    padding: '32px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
-    border: '1px solid #f0f0f0', overflow: 'hidden', position: 'relative',
-  },
-  bentoHeader: {
-    display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px',
-  },
-  bentoIcon: {
-    width: '44px', height: '44px', borderRadius: '12px',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-  },
-  bentoTitle: {
-    fontFamily: "'Philosopher', sans-serif", fontSize: '20px',
-    fontWeight: 700, color: '#1A1A1A', margin: 0,
-  },
-  itemRow: {
-    marginBottom: '16px', paddingBottom: '16px',
-    borderBottom: '1px solid #f5f5f5',
-  },
-  itemRowLast: { marginBottom: 0, paddingBottom: 0, borderBottom: 'none' },
-  itemTitle: {
-    fontWeight: 700, fontSize: '15px', color: '#1A1A1A',
-    margin: '0 0 4px', lineHeight: 1.4,
-  },
-  itemSub: {
-    fontSize: '13px', color: '#9ca3af',
-    fontWeight: 500, margin: 0, lineHeight: 1.5,
-  },
-  contactLine: {
-    display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '14px',
-  },
-  contactDot: {
-    width: '36px', height: '36px', borderRadius: '50%',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-  },
-  contactTxt: {
-    fontSize: '14px', fontWeight: 600, color: '#1A1A1A',
-    margin: 0, lineHeight: 1.5,
-  },
-
-  /* ── Conditions ── */
-  condWrap: {
-    maxWidth: '1400px', margin: '80px auto 0', padding: '0 48px 100px',
-  },
-  condHeader: {
-    display: 'flex', justifyContent: 'space-between',
-    alignItems: 'flex-end', marginBottom: '40px',
-  },
-  condTitle: {
-    fontFamily: "'Philosopher', sans-serif",
-    fontSize: 'clamp(32px, 4vw, 56px)', fontWeight: 700,
-    lineHeight: 1.1, color: '#1A1A1A', margin: 0, letterSpacing: '-1px',
-  },
-  condSub: {
-    fontSize: '16px', color: '#9ca3af', maxWidth: '280px',
-    textAlign: 'right', lineHeight: 1.5, fontWeight: 500,
-  },
-  condGrid: { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '16px' },
+/* ════════════════════════════════════════════════════════
+   COLOR PALETTE CONSTANTS
+   ════════════════════════════════════════════════════════ */
+const COLORS = {
+  moonTint:   '#f3f6ff',
+  sunnyHerb:  '#cef26d',
+  blueHarbor: '#3770bf',
+  iceBlue:    '#8dc2ff',
+  dark:       '#1A1A1A',
+  darkSoft:   '#2a2a2a',
+  textMuted:  '#6b7280',
+  white:      '#ffffff',
 };
 
-const bannerColors = [
-  { bg: '#3770bf', dark: true },
-  { bg: '#8dc2ff', dark: false },
-  { bg: '#cef26d', dark: false },
-  { bg: '#1A1A1A', dark: true },
-  { bg: '#84a98c', dark: true },
-];
+/* ════════════════════════════════════════════════════════
+   ACCORDION COMPONENT
+   ════════════════════════════════════════════════════════ */
+function Accordion({ title, icon, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="dp-accordion">
+      <button
+        className="dp-accordion-trigger"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        <span className="dp-accordion-icon-wrap">{icon}</span>
+        <span className="dp-accordion-title">{title}</span>
+        <ChevronDown
+          size={20}
+          style={{
+            marginLeft: 'auto',
+            transition: 'transform 0.3s ease',
+            transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+            color: COLORS.blueHarbor,
+          }}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            style={{ overflow: 'hidden' }}
+          >
+            <div className="dp-accordion-content">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
+/* ════════════════════════════════════════════════════════
+   INDIA MAP SVG COMPONENT
+   ════════════════════════════════════════════════════════ */
+function JourneyMap({ locations }) {
+  const [activePin, setActivePin] = useState(null);
 
+  /* Pin positions mapped to SVG viewBox coordinates */
+  const pinData = [
+    { ...locations[0], svgX: 340, svgY: 280, color: COLORS.sunnyHerb },  // Nagpur
+    { ...locations[1], svgX: 310, svgY: 430, color: COLORS.iceBlue },    // Tirunelveli
+    { ...locations[2], svgX: 325, svgY: 400, color: COLORS.iceBlue },    // Madurai
+    { ...locations[3], svgX: 80,  svgY: 80,  color: COLORS.blueHarbor }, // London
+    { ...locations[4], svgX: 30,  svgY: 120, color: COLORS.blueHarbor }, // USA
+  ];
 
-/* ═══════════════════════════════════════════════════
-   MAIN COMPONENT
-   ═══════════════════════════════════════════════════ */
+  /* Path connecting pins chronologically: Nagpur → Tirunelveli → Madurai → London → USA → back to Nagpur */
+  const pathD = `M340,280 C330,350 315,400 310,430 Q315,415 325,400 C280,300 150,150 80,80 C60,90 40,110 30,120 C100,200 250,250 340,280`;
+
+  return (
+    <div className="dp-map-container">
+      <svg viewBox="0 0 500 500" className="dp-map-svg" aria-label="Journey map showing Dr. Ambatkar's career path across cities">
+        {/* Background grid */}
+        <defs>
+          <pattern id="mapGrid" width="25" height="25" patternUnits="userSpaceOnUse">
+            <path d="M 25 0 L 0 0 0 25" fill="none" stroke={COLORS.iceBlue} strokeWidth="0.3" opacity="0.4" />
+          </pattern>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <rect width="500" height="500" fill="url(#mapGrid)" />
+
+        {/* Simplified India outline */}
+        <path
+          d="M280,180 C290,170 320,160 340,165 C360,170 380,180 390,200 C400,220 405,250 400,270 C395,290 385,310 370,340 C355,370 340,390 330,420 C325,440 315,460 300,470 C285,465 275,450 270,430 C265,410 260,390 255,370 C250,350 245,330 250,310 C255,290 265,280 270,260 C275,240 275,220 280,200 Z"
+          fill={COLORS.iceBlue}
+          opacity="0.15"
+          stroke={COLORS.iceBlue}
+          strokeWidth="1"
+          strokeOpacity="0.4"
+        />
+
+        {/* UK small circle */}
+        <circle cx="80" cy="80" r="20" fill={COLORS.iceBlue} opacity="0.12" stroke={COLORS.iceBlue} strokeWidth="0.8" strokeOpacity="0.4" />
+        <text x="80" y="60" textAnchor="middle" fill={COLORS.blueHarbor} fontSize="8" fontFamily="Inter" fontWeight="600" opacity="0.7">UK</text>
+
+        {/* USA small area */}
+        <rect x="10" y="100" width="40" height="30" rx="8" fill={COLORS.iceBlue} opacity="0.12" stroke={COLORS.iceBlue} strokeWidth="0.8" strokeOpacity="0.4" />
+        <text x="30" y="95" textAnchor="middle" fill={COLORS.blueHarbor} fontSize="8" fontFamily="Inter" fontWeight="600" opacity="0.7">USA</text>
+
+        {/* Connection path */}
+        <motion.path
+          d={pathD}
+          fill="none"
+          stroke={COLORS.blueHarbor}
+          strokeWidth="1.5"
+          strokeDasharray="6,4"
+          strokeOpacity="0.35"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 2.5, ease: 'easeInOut' }}
+        />
+
+        {/* Location pins */}
+        {pinData.map((pin, idx) => (
+          <g
+            key={idx}
+            style={{ cursor: 'pointer' }}
+            onMouseEnter={() => setActivePin(idx)}
+            onMouseLeave={() => setActivePin(null)}
+          >
+            {/* Pulse ring */}
+            <motion.circle
+              cx={pin.svgX} cy={pin.svgY} r="12"
+              fill="none" stroke={pin.color} strokeWidth="1.5"
+              initial={{ r: 8, opacity: 0.6 }}
+              animate={{ r: [8, 16, 8], opacity: [0.6, 0, 0.6] }}
+              transition={{ duration: 2.5, repeat: Infinity, delay: idx * 0.4 }}
+            />
+            {/* Pin dot */}
+            <circle cx={pin.svgX} cy={pin.svgY} r="6" fill={pin.color} filter="url(#glow)" />
+            <circle cx={pin.svgX} cy={pin.svgY} r="3" fill={COLORS.white} />
+
+            {/* Label */}
+            <text
+              x={pin.svgX + (pin.svgX > 250 ? -15 : 15)}
+              y={pin.svgY - 14}
+              textAnchor={pin.svgX > 250 ? 'end' : 'start'}
+              fill={COLORS.dark}
+              fontSize="9"
+              fontFamily="'Playfair Display', serif"
+              fontWeight="700"
+            >
+              {pin.city}
+            </text>
+          </g>
+        ))}
+      </svg>
+
+      {/* Pin detail cards */}
+      <div className="dp-map-pins-list">
+        {pinData.map((pin, idx) => (
+          <motion.div
+            key={idx}
+            className={`dp-map-pin-card ${activePin === idx ? 'active' : ''}`}
+            onMouseEnter={() => setActivePin(idx)}
+            onMouseLeave={() => setActivePin(null)}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: idx * 0.1 }}
+          >
+            <div className="dp-map-pin-dot" style={{ backgroundColor: pin.color }} />
+            <div>
+              <p className="dp-map-pin-city">{pin.city}<span className="dp-map-pin-country">, {pin.country}</span></p>
+              <p className="dp-map-pin-label">{pin.label}</p>
+              <p className="dp-map-pin-period">{pin.period}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MAIN DOCTOR PROFILE COMPONENT
+   ════════════════════════════════════════════════════════ */
 export default function DoctorProfile() {
   const { id } = useParams();
   const doctor = doctors.find(d => d.id === id);
@@ -182,326 +203,443 @@ export default function DoctorProfile() {
 
   if (!doctor) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f3f6ff' }}>
-        <div style={{ textAlign: 'center' }}>
-          <h2 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '16px' }}>Doctor not found</h2>
-          <Link to="/" style={{ color: '#3770bf', fontWeight: 600 }}>Return to Home</Link>
-        </div>
+      <div className="dp-not-found">
+        <h2>Doctor not found</h2>
+        <Link to="/" style={{ color: COLORS.blueHarbor, fontWeight: 600 }}>Return to Home</Link>
       </div>
     );
   }
 
   const yearsSince = new Date().getFullYear() - (doctor.practisingSince || 2001);
 
+  /* Polaroid rotation angles for conditions cards */
+  const rotations = [-3, 2, -1.5, 3, -2, 1, -2.5, 2.5, -1, 1.5];
+
   return (
-    <div style={S.page}>
+    <div className="dp-page">
 
-      {/* ══════════ HERO ══════════ */}
-      <div style={S.wrap}>
-        <Link to="/" style={S.backLink}>
-          <ChevronLeft size={18} />
-          <span>Back to Home</span>
-        </Link>
+      {/* ╔══════════════════════════════════════════════════╗
+          ║  SECTION 1 — HERO & OVERVIEW                    ║
+          ╚══════════════════════════════════════════════════╝ */}
+      <section className="dp-hero">
+        <div className="dp-hero-gridlines" />
 
-        <div style={S.heroGrid}>
-          {/* Left */}
-          <motion.div style={S.heroLeft}
-            initial={{ opacity: 0, x: -60 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-          >
-            <h1 style={S.heroTitle}>
-              <span style={{ color: '#3770bf' }}>{doctor.specialisation?.split(' ')[0]}</span>
-              <br />
-              {doctor.specialisation?.split(' ').slice(1).join(' ') || 'Expert'}
-            </h1>
+        <div className="dp-wrap">
+          <Link to="/" className="dp-back-link">
+            <ChevronLeft size={18} />
+            <span>Back to Home</span>
+          </Link>
 
-            <p style={S.heroDesc}>{doctor.about}</p>
-
-            {/* Stats with icons */}
-            <div style={S.statsRow}>
-              <div style={S.statCard}>
-                <div style={{ ...S.statIconBox, backgroundColor: '#eef4ff', color: '#3770bf' }}>
-                  <Stethoscope size={24} />
-                </div>
-                <div>
-                  <p style={S.statNum}>+{yearsSince}</p>
-                  <span style={S.statLabel}>Years Experience</span>
-                </div>
-              </div>
-              <div style={S.statCard}>
-                <div style={{ ...S.statIconBox, backgroundColor: '#f0fdf4', color: '#22c55e' }}>
-                  <Eye size={24} />
-                </div>
-                <div>
-                  <p style={S.statNum}>{doctor.ailments?.length || 0}+</p>
-                  <span style={S.statLabel}>Conditions Treated</span>
-                </div>
-              </div>
-              <div style={S.statCard}>
-                <div style={{ ...S.statIconBox, backgroundColor: '#fef3c7', color: '#f59e0b' }}>
-                  <Users size={24} />
-                </div>
-                <div>
-                  <p style={S.statNum}>{doctor.hospital?.facilities?.length || 0}</p>
-                  <span style={S.statLabel}>Facilities</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right — Doctor image */}
-          <motion.div style={S.imgWrap}
-            initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}
-          >
-            <div style={S.imgContainer}>
-              <img src={doctor.image} alt={doctor.name} style={S.img} />
-              <div style={S.imgBadge}>
-                <img src={doctor.image} alt="" style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', border: '3px solid #3770bf' }} />
-                <div style={{ flex: 1 }}>
-                  <p style={{ fontWeight: 800, fontSize: 15, color: '#1A1A1A', margin: 0 }}>{doctor.name}</p>
-                  <p style={{ fontSize: 12, color: '#3770bf', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, margin: '2px 0 0' }}>{doctor.qualifications}</p>
-                </div>
-                <div style={{ width: 40, height: 40, borderRadius: '50%', backgroundColor: '#1A1A1A', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <ArrowUpRight size={18} />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* ══════════ BENTO DETAILS GRID ══════════ */}
-      <div style={{ ...S.wrap, marginTop: '80px' }}>
-        <div style={S.bento}>
-
-          {/* ── Card 1: Experience (spans 5 cols, 3 rows) ── */}
-          <motion.div
-            style={{ ...S.bentoCard, gridColumn: 'span 5', gridRow: 'span 3' }}
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.5 }}
-          >
-            <div style={S.bentoHeader}>
-              <div style={{ ...S.bentoIcon, backgroundColor: '#eef4ff', color: '#3770bf' }}>
-                <Award size={20} />
-              </div>
-              <h3 style={S.bentoTitle}>Experience</h3>
-            </div>
-            {doctor.fellowships?.map((f, i) => (
-              <div key={i} style={i === doctor.fellowships.length - 1 ? S.itemRowLast : S.itemRow}>
-                <p style={S.itemTitle}>{f.split('.')[0]}</p>
-                <p style={S.itemSub}>{f.split('.').slice(1).join('.').trim()}</p>
-              </div>
-            ))}
-            {doctor.accreditations?.map((a, i) => (
-              <div key={`a${i}`} style={{ ...S.itemRow, ...(i === doctor.accreditations.length - 1 ? S.itemRowLast : {}) }}>
-                <p style={{ ...S.itemTitle, fontSize: '14px' }}>{a}</p>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* ── Card 2: Education (spans 4 cols, 3 rows) ── */}
-          <motion.div
-            style={{ ...S.bentoCard, gridColumn: 'span 4', gridRow: 'span 3' }}
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.08 }}
-          >
-            <div style={S.bentoHeader}>
-              <div style={{ ...S.bentoIcon, backgroundColor: '#f0fdf4', color: '#22c55e' }}>
-                <GraduationCap size={20} />
-              </div>
-              <h3 style={S.bentoTitle}>Education</h3>
-            </div>
-            {doctor.training?.map((t, i) => (
-              <div key={i} style={i === doctor.training.length - 1 ? S.itemRowLast : S.itemRow}>
-                <p style={S.itemTitle}>{t.split(':')[0]}</p>
-                <p style={S.itemSub}>{t.split(':')[1]?.trim()}</p>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* ── Card 3: Quick fact — accent card (spans 3 cols, 2 rows) ── */}
-          <motion.div
-            style={{
-              gridColumn: 'span 3', gridRow: 'span 3',
-              borderRadius: '24px', padding: '32px',
-              background: 'linear-gradient(135deg, #3770bf 0%, #2c5999 100%)',
-              color: '#fff', display: 'flex', flexDirection: 'column',
-              justifyContent: 'space-between', position: 'relative', overflow: 'hidden',
-            }}
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.16 }}
-          >
-            <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '180px', height: '180px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
-            <div style={{ position: 'absolute', bottom: '-60px', left: '-30px', width: '140px', height: '140px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)' }} />
-
-            <div>
-              <Stethoscope size={32} style={{ marginBottom: '16px', opacity: 0.7 }} />
-              <h3 style={{ fontFamily: "'Philosopher', sans-serif", fontSize: '28px', fontWeight: 700, margin: '0 0 8px', lineHeight: 1.2 }}>
-                Practising Since
-              </h3>
-              <p style={{ fontSize: '56px', fontWeight: 900, fontFamily: "'Philosopher', sans-serif", margin: '8px 0 0', lineHeight: 1 }}>
-                {doctor.practisingSince || 2001}
-              </p>
-            </div>
-            <p style={{ fontSize: '14px', opacity: 0.7, fontWeight: 500, margin: '16px 0 0', lineHeight: 1.5 }}>
-              Based at {doctor.hospital.name}
-            </p>
-          </motion.div>
-
-          {/* ── Card 4: Contact (spans 5 cols, 3 rows) ── */}
-          <motion.div
-            style={{ ...S.bentoCard, gridColumn: 'span 5', gridRow: 'span 3' }}
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <div style={S.bentoHeader}>
-              <div style={{ ...S.bentoIcon, backgroundColor: '#fef3c7', color: '#f59e0b' }}>
-                <Phone size={20} />
-              </div>
-              <h3 style={S.bentoTitle}>Contact & Location</h3>
-            </div>
-
-            <div style={S.contactLine}>
-              <div style={{ ...S.contactDot, backgroundColor: '#f3f4f6' }}><Phone size={15} color="#374151" /></div>
-              <p style={S.contactTxt}>{doctor.phone}</p>
-            </div>
-            <div style={S.contactLine}>
-              <div style={{ ...S.contactDot, backgroundColor: '#3770bf' }}><Mail size={15} color="#fff" /></div>
-              <p style={S.contactTxt}>contact@shaureen.com</p>
-            </div>
-            <div style={{ ...S.contactLine, alignItems: 'flex-start' }}>
-              <div style={{ ...S.contactDot, backgroundColor: '#cef26d', marginTop: 2 }}><MapPin size={15} color="#1A1A1A" /></div>
-              <p style={{ ...S.contactTxt, fontWeight: 500, color: '#6b7280' }}>{doctor.hospital.name}<br />{doctor.hospital.address}</p>
-            </div>
-            <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #f0f0f0' }}>
-              <div style={S.contactLine}>
-                <div style={{ ...S.contactDot, backgroundColor: '#1A1A1A' }}><Clock size={15} color="#fff" /></div>
-                <p style={S.contactTxt}>{doctor.hospital.timings}</p>
-              </div>
-            </div>
-          </motion.div>
-
-
-
-          {/* ── Card 5: Facilities (spans 12 cols, 2 rows) ── */}
-          <motion.div
-            style={{ ...S.bentoCard, gridColumn: 'span 12', gridRow: 'span 2' }}
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div style={S.bentoHeader}>
-              <div style={{ ...S.bentoIcon, backgroundColor: '#fce7f3', color: '#ec4899' }}>
-                <Building2 size={20} />
-              </div>
-              <h3 style={S.bentoTitle}>Hospital Facilities</h3>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-              {doctor.hospital?.facilities?.map((f, i) => (
-                <span key={i} style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '6px',
-                  padding: '8px 16px', borderRadius: '12px',
-                  backgroundColor: '#f9fafb', fontSize: '13px',
-                  fontWeight: 600, color: '#374151', border: '1px solid #f0f0f0',
-                }}>
-                  <Zap size={12} color="#3770bf" />
-                  {f}
+          <div className="dp-hero-layout">
+            {/* Left — Text */}
+            <motion.div
+              className="dp-hero-left"
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
+              <div className="dp-hero-badge-row">
+                <span className="dp-pill dp-pill-herb">
+                  <Eye size={14} /> Vitreo-Retinal Surgeon
                 </span>
+                <span className="dp-pill dp-pill-ice">
+                  <Calendar size={14} /> Since {doctor.practisingSince}
+                </span>
+              </div>
+
+              <h1 className="dp-hero-title">
+                <span className="dp-hero-title-dr">Dr.</span>
+                <br />
+                <span className="dp-hero-title-name">Shamik A.</span>
+                <br />
+                <span className="dp-hero-title-surname">Ambatkar</span>
+              </h1>
+
+              <p className="dp-hero-quals">{doctor.qualifications}</p>
+
+              <p className="dp-hero-desc">{doctor.about}</p>
+
+              {/* Stats row */}
+              <div className="dp-hero-stats">
+                <div className="dp-stat">
+                  <span className="dp-stat-num">{yearsSince}+</span>
+                  <span className="dp-stat-label">Years<br/>Experience</span>
+                </div>
+                <div className="dp-stat-divider" />
+                <div className="dp-stat">
+                  <span className="dp-stat-num">{doctor.ailments?.length || 0}</span>
+                  <span className="dp-stat-label">Conditions<br/>Treated</span>
+                </div>
+                <div className="dp-stat-divider" />
+                <div className="dp-stat">
+                  <span className="dp-stat-num">{doctor.publications?.length || 0}</span>
+                  <span className="dp-stat-label">Research<br/>Papers</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right — Image collage */}
+            <motion.div
+              className="dp-hero-right"
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
+            >
+              {/* Main image with overlapping frames */}
+              <div className="dp-hero-collage">
+                <div className="dp-collage-frame dp-collage-frame-accent" />
+                <div className="dp-collage-frame dp-collage-frame-ice" />
+                <div className="dp-collage-main-img">
+                  <img src={drImg} alt="Dr. Shamik A. Ambatkar" />
+                </div>
+                {/* Abstract map element */}
+                <div className="dp-collage-map-element">
+                  <MapPin size={16} color={COLORS.sunnyHerb} />
+                  <span>Nagpur, India</span>
+                </div>
+                {/* Floating credential badge */}
+                <motion.div
+                  className="dp-collage-badge"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <Award size={18} color={COLORS.blueHarbor} />
+                  <div>
+                    <p className="dp-collage-badge-title">DNB Ophthalmology</p>
+                    <p className="dp-collage-badge-sub">Aravind Eye Hospital</p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Decorative quote strip */}
+        <div className="dp-hero-quote-strip">
+          <p>"Dedicated to restoring and preserving vision through advanced surgical excellence."</p>
+        </div>
+      </section>
+
+
+      {/* ╔══════════════════════════════════════════════════╗
+          ║  SECTION 2 — SPECIALIZATIONS NODE MAP           ║
+          ╚══════════════════════════════════════════════════╝ */}
+      <section className="dp-skills">
+        <div className="dp-wrap">
+          <motion.div
+            className="dp-section-header"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="dp-section-tag">Expertise</span>
+            <h2 className="dp-section-title">Specialization &<br/>Core Competencies</h2>
+          </motion.div>
+
+          <div className="dp-node-map">
+            {/* Central node */}
+            <motion.div
+              className="dp-node-center"
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, type: 'spring' }}
+            >
+              <Eye size={28} color={COLORS.white} />
+              <span>Core Expertise</span>
+            </motion.div>
+
+            {/* Connecting lines + skill nodes */}
+            <div className="dp-node-ring">
+              {(doctor.specializations || []).map((spec, idx) => {
+                const angle = (idx * 72) - 90; /* 360/5 = 72 degrees apart, start from top */
+                return (
+                  <motion.div
+                    key={idx}
+                    className="dp-node-item"
+                    style={{ '--angle': `${angle}deg`, '--idx': idx }}
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.15 + idx * 0.1 }}
+                  >
+                    {/* Connecting line */}
+                    <div className="dp-node-line" style={{ '--angle': `${angle}deg` }} />
+                    <div className="dp-node-card">
+                      <h4 className="dp-node-card-title">{spec.title}</h4>
+                      <p className="dp-node-card-desc">{spec.description}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ╔══════════════════════════════════════════════════╗
+          ║  SECTION 3 — EDUCATION & EXPERIENCE TIMELINE    ║
+          ╚══════════════════════════════════════════════════╝ */}
+      <section className="dp-timeline">
+        <div className="dp-wrap">
+          <motion.div
+            className="dp-section-header dp-section-header-light"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="dp-section-tag dp-section-tag-light">Career</span>
+            <h2 className="dp-section-title dp-section-title-light">Education &<br/>Experience</h2>
+          </motion.div>
+
+          <div className="dp-timeline-grid">
+            {/* Education cards */}
+            {(doctor.education || []).map((edu, idx) => (
+              <motion.div
+                key={`edu-${idx}`}
+                className="dp-passport-card"
+                style={{ '--rotate': `${idx % 2 === 0 ? -1.5 : 1.5}deg` }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+              >
+                <div className="dp-passport-stamp">
+                  <GraduationCap size={20} color={COLORS.sunnyHerb} />
+                </div>
+                <span className="dp-passport-year">{edu.year}</span>
+                <h4 className="dp-passport-degree">{edu.degree}</h4>
+                <p className="dp-passport-institution">{edu.institution}</p>
+                <p className="dp-passport-location">
+                  <MapPin size={12} /> {edu.location}
+                </p>
+              </motion.div>
+            ))}
+
+            {/* Experience cards */}
+            {(doctor.experienceTimeline || []).map((exp, idx) => (
+              <motion.div
+                key={`exp-${idx}`}
+                className="dp-passport-card dp-passport-card-wide"
+                style={{ '--rotate': `${idx % 2 === 0 ? 1 : -1}deg` }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+              >
+                <div className="dp-passport-stamp">
+                  <Briefcase size={20} color={COLORS.sunnyHerb} />
+                </div>
+                <span className="dp-passport-year">{exp.period}</span>
+                <h4 className="dp-passport-degree">{exp.role}</h4>
+                <p className="dp-passport-institution">{exp.institution}</p>
+                <p className="dp-passport-desc">{exp.description}</p>
+              </motion.div>
+            ))}
+
+            {/* Fellowship cards */}
+            {(doctor.fellowships || []).map((f, idx) => {
+              const parts = f.split('.');
+              return (
+                <motion.div
+                  key={`fellow-${idx}`}
+                  className="dp-passport-card dp-passport-card-accent"
+                  style={{ '--rotate': `${idx % 2 === 0 ? -2 : 2}deg` }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.35 + idx * 0.1 }}
+                >
+                  <div className="dp-passport-stamp">
+                    <Award size={20} color={COLORS.dark} />
+                  </div>
+                  <span className="dp-passport-year">{parts[2]?.trim() || ''}</span>
+                  <h4 className="dp-passport-degree">{parts[0]?.trim()}</h4>
+                  <p className="dp-passport-institution">{parts[1]?.trim()}</p>
+                  <p className="dp-passport-location">
+                    <Globe size={12} /> {parts[3]?.trim().replace(/[()]/g, '') || ''}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+
+      {/* ╔══════════════════════════════════════════════════╗
+          ║  SECTION 4 — CONDITIONS TREATED GALLERY         ║
+          ╚══════════════════════════════════════════════════╝ */}
+      <section className="dp-conditions">
+        <div className="dp-wrap">
+          <motion.div
+            className="dp-section-header"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="dp-section-tag">Treatments</span>
+            <h2 className="dp-section-title">Conditions<br/>Treated</h2>
+            <p className="dp-section-subtitle">Specialized diagnosis and treatment across a wide range of ophthalmic conditions</p>
+          </motion.div>
+
+          <div className="dp-polaroid-grid">
+            {(doctor.ailments || []).map((ailment, idx) => (
+              <motion.div
+                key={idx}
+                className="dp-polaroid"
+                style={{ '--rotate': `${rotations[idx % rotations.length]}deg` }}
+                initial={{ opacity: 0, y: 30, rotate: 0 }}
+                whileInView={{ opacity: 1, y: 0, rotate: rotations[idx % rotations.length] }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.06 }}
+                whileHover={{ rotate: 0, scale: 1.05, zIndex: 10 }}
+              >
+                <div className="dp-polaroid-inner">
+                  <div className="dp-polaroid-icon">
+                    <Eye size={24} color={COLORS.blueHarbor} />
+                  </div>
+                  <span className="dp-polaroid-number">{String(idx + 1).padStart(2, '0')}</span>
+                </div>
+                <p className="dp-polaroid-label">{ailment}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* ╔══════════════════════════════════════════════════╗
+          ║  SECTION 5 — JOURNEY OF LIFE MAP                ║
+          ╚══════════════════════════════════════════════════╝ */}
+      <section className="dp-journey">
+        <div className="dp-wrap">
+          <motion.div
+            className="dp-section-header"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="dp-section-tag">Journey</span>
+            <h2 className="dp-section-title">Journey of<br/>Life</h2>
+            <p className="dp-section-subtitle">Tracing the path of excellence across continents</p>
+          </motion.div>
+
+          {doctor.journeyLocations && (
+            <JourneyMap locations={doctor.journeyLocations} />
+          )}
+        </div>
+      </section>
+
+
+      {/* ╔══════════════════════════════════════════════════╗
+          ║  ACCORDIONS — Publications, Presentations, etc  ║
+          ╚══════════════════════════════════════════════════╝ */}
+      <section className="dp-accordions">
+        <div className="dp-wrap">
+          {/* Publications */}
+          <Accordion
+            title={`Publications & Research (${doctor.publications?.length || 0})`}
+            icon={<BookOpen size={18} color={COLORS.blueHarbor} />}
+            defaultOpen={true}
+          >
+            <div className="dp-pub-list">
+              {(doctor.publications || []).map((pub, idx) => (
+                <div key={idx} className="dp-pub-item">
+                  <span className="dp-pub-number">{String(idx + 1).padStart(2, '0')}</span>
+                  <div>
+                    <p className="dp-pub-title">{pub.title}</p>
+                    <p className="dp-pub-journal">
+                      <FileText size={12} /> {pub.journal}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </Accordion>
 
-        </div>
-      </div>
-
-      {/* ══════════ CONDITIONS — Bento Layout ══════════ */}
-      <div style={S.condWrap}>
-        <div style={S.condHeader}>
-          <h2 style={S.condTitle}>Conditions<br />Treated</h2>
-          <p style={S.condSub}>Specialized diagnosis and treatment across a wide range of ophthalmic conditions</p>
-        </div>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(12, 1fr)',
-          gridAutoRows: 'minmax(100px, auto)',
-          gap: '16px',
-        }}>
-          {doctor.ailments?.map((ailment, idx) => {
-            const c = bannerColors[idx % bannerColors.length];
-            /* Vary span sizes for visual interest */
-            let colSpan, rowSpan;
-            if (idx === 0) { colSpan = 5; rowSpan = 2; }       /* big featured */
-            else if (idx === 1) { colSpan = 4; rowSpan = 2; }   /* medium tall */
-            else if (idx === 2) { colSpan = 3; rowSpan = 2; }   /* small tall */
-            else if (idx === 3) { colSpan = 6; rowSpan = 1; }   /* wide short */
-            else if (idx === 4) { colSpan = 6; rowSpan = 1; }   /* wide short */
-            else if (idx === 5) { colSpan = 4; rowSpan = 1; }   /* medium */
-            else if (idx === 6) { colSpan = 4; rowSpan = 1; }   /* medium */
-            else if (idx === 7) { colSpan = 4; rowSpan = 1; }   /* medium */
-            else { colSpan = 3; rowSpan = 1; }                   /* small */
-
-            return (
-              <motion.div key={idx}
-                initial={{ y: 40, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }} transition={{ duration: 0.45, delay: idx * 0.06 }}
-                style={{
-                  gridColumn: `span ${colSpan}`, gridRow: `span ${rowSpan}`,
-                  backgroundColor: c.bg, borderRadius: '24px',
-                  padding: idx < 3 ? '36px 32px' : '28px 28px',
-                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                  position: 'relative', overflow: 'hidden', cursor: 'pointer',
-                  transition: 'transform 0.4s ease, box-shadow 0.4s ease',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = `0 20px 40px ${c.bg}35`; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
-              >
-                {/* Giant ghost number */}
-                <span style={{
-                  position: 'absolute',
-                  bottom: idx < 3 ? '-30px' : '-20px',
-                  right: idx < 3 ? '-10px' : '-5px',
-                  fontFamily: "'Philosopher', sans-serif",
-                  fontSize: idx < 3 ? '180px' : '120px',
-                  fontWeight: 900, lineHeight: 1,
-                  color: c.dark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.05)',
-                  pointerEvents: 'none', userSelect: 'none',
-                }}>
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-
-                {/* Top — icon circle */}
-                <div style={{
-                  width: idx < 3 ? '52px' : '40px',
-                  height: idx < 3 ? '52px' : '40px',
-                  borderRadius: '50%',
-                  backgroundColor: c.dark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.06)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: idx < 3 ? '0' : '12px',
-                }}>
-                  <Eye size={idx < 3 ? 22 : 16} color={c.dark ? '#fff' : '#1A1A1A'} />
+          {/* Presentations & Teaching */}
+          <Accordion
+            title="Presentations & Teaching"
+            icon={<Mic size={18} color={COLORS.blueHarbor} />}
+          >
+            <div className="dp-pres-list">
+              {(doctor.presentations || []).map((pres, idx) => (
+                <div key={idx} className="dp-pres-item">
+                  <div className="dp-pres-dot" />
+                  <p>{pres}</p>
                 </div>
+              ))}
+            </div>
+          </Accordion>
 
-                {/* Bottom — text */}
-                <div style={{ position: 'relative', zIndex: 1 }}>
-                  <h3 style={{
-                    fontFamily: "'Philosopher', sans-serif",
-                    fontSize: idx < 3 ? '24px' : '18px',
-                    fontWeight: 700, color: c.dark ? '#fff' : '#1A1A1A',
-                    margin: 0, lineHeight: 1.2,
-                  }}>{ailment}</h3>
-                  {idx < 5 && (
-                    <p style={{
-                      fontSize: '13px', fontWeight: 500, margin: '8px 0 0',
-                      color: c.dark ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.4)',
-                    }}>Specialized treatment & care</p>
-                  )}
+          {/* Accreditations */}
+          <Accordion
+            title="Accreditations & Memberships"
+            icon={<Shield size={18} color={COLORS.blueHarbor} />}
+          >
+            <div className="dp-pres-list">
+              {(doctor.accreditations || []).map((acc, idx) => (
+                <div key={idx} className="dp-pres-item">
+                  <div className="dp-pres-dot" style={{ backgroundColor: COLORS.sunnyHerb }} />
+                  <p>{acc}</p>
                 </div>
-              </motion.div>
-            );
-          })}
+              ))}
+            </div>
+          </Accordion>
+
+          {/* Contact */}
+          <div className="dp-contact-strip">
+            <div className="dp-contact-strip-inner">
+              <Phone size={20} color={COLORS.blueHarbor} />
+              <div>
+                <p className="dp-contact-strip-label">Contact</p>
+                <p className="dp-contact-strip-value">{doctor.phone}</p>
+              </div>
+            </div>
+            <div className="dp-contact-strip-inner">
+              <Building2 size={20} color={COLORS.blueHarbor} />
+              <div>
+                <p className="dp-contact-strip-label">Hospital</p>
+                <p className="dp-contact-strip-value">{doctor.hospital?.name}</p>
+                <p className="dp-contact-strip-address">{doctor.hospital?.address}</p>
+              </div>
+            </div>
+            <div className="dp-contact-strip-inner">
+              <MapPin size={20} color={COLORS.sunnyHerb} />
+              <div>
+                <p className="dp-contact-strip-label">Timings</p>
+                <p className="dp-contact-strip-value">{doctor.hospital?.timings}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Facilities */}
+          <div className="dp-facilities">
+            <h3 className="dp-facilities-title">Hospital Facilities</h3>
+            <div className="dp-facilities-grid">
+              {(doctor.hospital?.facilities || []).map((f, idx) => (
+                <motion.span
+                  key={idx}
+                  className="dp-facility-tag"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: idx * 0.05 }}
+                >
+                  <Zap size={12} color={COLORS.blueHarbor} />
+                  {f}
+                </motion.span>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
     </div>
   );

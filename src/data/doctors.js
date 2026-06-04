@@ -9,17 +9,64 @@ export const doctors = [
     phone: "0712 2232005",
     image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800",
     coverImage: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=1200",
-    about: "Dr. Shamik A Ambatkar is a Vitreo-Retinal Surgeon based in Nagpur, where he practises at the Shaureen Advanced Eye Care Hospital. He has an MBBS and Diplomate of the National Board (DNB) in Ophthalmology as his main medical qualifications. He did his post-graduation from Aravind Eye Hospital in Madurai, where he was also a Consultant for four years, while completing a Fellowship in Vitreo-Retina there and clearing the Part I requirements for fellow status at the International Council of Ophthalmology (London).",
+    about: "Dr. Shamik A Ambatkar is a premier Vitreo-Retinal Surgeon based in Nagpur at Shaureen Advanced Eye Care Hospital. He has an MBBS and Diplomate of the National Board (DNB) in Ophthalmology as his main medical qualifications. He did his post-graduation from Aravind Eye Hospital in Madurai, where he was also a Consultant for four years, while completing a Fellowship in Vitreo-Retina there and clearing the Part I requirements for fellow status at the International Council of Ophthalmology (London).",
+
+    specializations: [
+      { title: "Vitreo-Retinal Surgery", description: "Advanced surgical treatment of retinal detachments, macular holes, and vitreous hemorrhage." },
+      { title: "Manual SICS", description: "Manual small-incision cataract surgery — a cost-effective, sutureless technique." },
+      { title: "Instrumental Phacoemulsification", description: "Modern ultrasound-based cataract removal with foldable IOL implantation." },
+      { title: "Orbital Surgeries", description: "Surgical management of conditions affecting the eye socket and surrounding structures." },
+      { title: "Diabetic Retinopathy Management", description: "Comprehensive screening, laser treatment, and surgical intervention for diabetic eye disease." }
+    ],
+
+    education: [
+      { degree: "MBBS", institution: "Government Medical College", year: 1995, location: "Nagpur" },
+      { degree: "DNB (Ophthalmology)", institution: "Aravind Eye Hospital", year: 2001, location: "Tirunelveli" }
+    ],
+
+    experienceTimeline: [
+      { role: "Head of Department & Consultant", institution: "Aravind Eye Hospital", period: "2002–2005", description: "Vitreo-Retina services under Dr. P Namperumalsamy. Led retinal surgery department and trained post-graduate residents." },
+      { role: "Founder & Chief Surgeon", institution: "Shaureen Advanced Eye Care Hospital", period: "2007–Present", description: "Founded private practice specializing in advanced retinal surgeries, glaucoma management, and laser treatments." }
+    ],
+
     fellowships: [
       "Fellowship in Vitreo-Retinal Surgery. Aravind Eye Hospital. 2003. (India)",
       "Fellow, International Council of Ophthalmology (Part I). London. 2003. (United Kingdom)"
     ],
+
     accreditations: [
       "Member, Rotary International.",
       "Member, Rotary Club of Nagpur, Wardha.",
       "Organising Committee Member, Tamil Nadu Ophthalmic Association Conference, Tirunelveli. 2004.",
       "Organising Committee Member, Glaucoma Society of India Annual Meeting, Tirunelveli. 2003."
     ],
+
+    publications: [
+      { title: "Fuchs' heterochromic uveitis with Duane's retraction syndrome: A co-existence or coincidence?", journal: "Journal of Tamil Nadu Ophthalmic Association" },
+      { title: "Pseudo tumour cerebri with penicillin.", journal: "Journal of Tamil Nadu Ophthalmic Association" },
+      { title: "Optical coherence tomographic findings in acute macular neuroretinopathy.", journal: "Eye Journal (London)" },
+      { title: "Congenital hamartoma of retinal pigment epithelium: OCT findings.", journal: "American Journal of Ophthalmology" },
+      { title: "Waardenberg syndrome.", journal: "Indian Journal of Ophthalmology" },
+      { title: "OCT findings in solar retinopathy.", journal: "Indian Journal of Ophthalmology" }
+    ],
+
+    presentations: [
+      "Free Paper Presentations: Annual Tamil Nadu Ophthalmic Association Conference (2000, 2002, 2003, 2004)",
+      "Free Paper Presentations: Annual Conference of All India Ophthalmic Association (2003, 2004)",
+      "Free Paper Presentation: Annual Conference of the Vitreo-Retinal Society (2004)",
+      "Instruction Course & Ophthalmology Update Programs conducted at Aravind Eye Hospital.",
+      "Guest Faculty: CME Nagpur Academy of Ophthalmology (2005), IMA Tuticorin, Vidharbha Ophthalmic Society (2007, 2008).",
+      "Teaching Experience: Lecturer at INMC, Sawangi, Wardha."
+    ],
+
+    journeyLocations: [
+      { city: "Nagpur", country: "India", x: 62, y: 52, label: "Government Medical College & Shaureen Hospital", period: "1990–1995, 2007–Present" },
+      { city: "Tirunelveli", country: "India", x: 58, y: 82, label: "Aravind Eye Hospital — DNB, Fellowship, HOD", period: "1998–2005" },
+      { city: "Madurai", country: "India", x: 60, y: 78, label: "Aravind Eye Hospital — Residency", period: "1998–2001" },
+      { city: "London", country: "UK", x: 20, y: 18, label: "International Council of Ophthalmology — Part I", period: "2003" },
+      { city: "USA (Telelink)", country: "USA", x: 8, y: 25, label: "Wilmer Eye Hospital — Inaugural Case Report", period: "2003" }
+    ],
+
     ailments: [
       "Age Related Macular Degeneration",
       "Cataract",
