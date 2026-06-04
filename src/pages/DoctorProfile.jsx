@@ -6,9 +6,12 @@ import {
   GraduationCap, Eye, BookOpen,
   Building2, Zap, Globe, Calendar, Briefcase,
   FileText, Mic, Shield, ArrowUpRight,
+  Droplets, Scan, SunMedium, FlameKindling, Activity,
+  Microscope, HeartPulse, Glasses, Bug, Flame,
 } from 'lucide-react';
 import { doctors } from '../data/doctors';
 import drImg from '../img/R-1.jpg';
+import WaveSeparator, { DiagonalSlash, SeismicEdge, DotDissolve } from '../components/WaveSeparator';
 
 const C = {
   moon: '#f3f6ff', herb: '#cef26d', harbor: '#3770bf',
@@ -201,11 +204,6 @@ export default function DoctorProfile() {
 
           {/* Organic skill nodes — diamond layout */}
           <div className="dp2-skill-nodes">
-            {/* Central hub */}
-            <div className="dp2-skill-hub">
-              <Eye size={32} />
-              <span>Core<br/>Expertise</span>
-            </div>
 
             {/* Connecting arms + nodes */}
             {(doctor.specializations || []).map((spec, idx) => (
@@ -228,6 +226,7 @@ export default function DoctorProfile() {
 
 
       {/* ═══════ SECTION 3 — EDUCATION & EXPERIENCE ═══════ */}
+      <DiagonalSlash />
       <section className="dp2-timeline">
         <div className="dp2-timeline-inner">
           <motion.div className="dp2-timeline-header"
@@ -306,6 +305,7 @@ export default function DoctorProfile() {
 
 
       {/* ═══════ SECTION 4 — CONDITIONS TREATED ═══════ */}
+      <SeismicEdge />
       <section className="dp2-conditions">
         <div className="dp2-conditions-inner">
           <motion.div className="dp2-conditions-header"
@@ -315,37 +315,136 @@ export default function DoctorProfile() {
             <h2 className="dp2-editorial-h2">What We<br/>Treat</h2>
           </motion.div>
 
-          <div className="dp2-scatter">
-            {(doctor.ailments || []).map((ailment, idx) => {
-              const rots = [-5, 3, -2, 6, -4, 2, -3, 5, -1, 4];
-              return (
-                <motion.div key={idx}
-                  className="dp2-scatter-card"
-                  style={{ '--srot': `${rots[idx % rots.length]}deg` }}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  whileHover={{ rotate: 0, scale: 1.08, zIndex: 20 }}>
-                  <div className="dp2-scatter-top">
-                    <div className="dp2-scatter-icon">
-                      <Eye size={18} color={C.harbor} />
-                    </div>
-                  </div>
-                  <div className="dp2-scatter-bot">
-                    <span className="dp2-scatter-num">{String(idx + 1).padStart(2, '0')}</span>
-                    <h4>{ailment}</h4>
-                  </div>
-                  <div className="dp2-scatter-shadow" />
-                </motion.div>
-              );
-            })}
+          {/* Bento grid — each ailment gets a unique illustrative icon + accent */}
+          <div className="dp2-bento">
+            {/* Row 1+2 — AMD (2×2), Cataract (1×2), Diabetic (1×1), Glaucoma (1×1) */}
+            <motion.div className="dp2-bento-card dp2-bento-c1"
+              style={{ '--card-bg': '#eef4ff' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#3770bf' }}><Scan size={32} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#3770bf' }}>Age Related Macular Degeneration</h4>
+                <p style={{ color: '#3770bf', opacity: 0.65 }}>Retinal centre deterioration affecting central vision clarity.</p>
+              </div>
+            </motion.div>
+
+            <motion.div className="dp2-bento-card dp2-bento-c2"
+              style={{ '--card-bg': '#cef26d' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.06 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#1A1A1A' }}><Eye size={28} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#1A1A1A' }}>Cataract</h4>
+                <p style={{ color: '#1A1A1A', opacity: 0.65 }}>Lens clouding — treated with phaco or SICS surgery.</p>
+              </div>
+            </motion.div>
+
+            <motion.div className="dp2-bento-card dp2-bento-c3"
+              style={{ '--card-bg': '#3770bf' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.12 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#fff' }}><Activity size={28} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#fff' }}>Diabetic Retinopathy</h4>
+                <p style={{ color: '#fff', opacity: 0.65 }}>Vascular damage to the retina from chronic high blood sugar.</p>
+              </div>
+            </motion.div>
+
+            <motion.div className="dp2-bento-card dp2-bento-c4"
+              style={{ '--card-bg': '#f0f5ff' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.18 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#3770bf' }}><HeartPulse size={26} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#3770bf' }}>Glaucoma</h4>
+                <p style={{ color: '#3770bf', opacity: 0.65 }}>Optic nerve damage due to elevated intraocular pressure.</p>
+              </div>
+            </motion.div>
+
+            {/* Row 3+4 — Hypertensive (2×1), Uveitis (1×1), Refractive (1×1), Conjunctivitis (1×1), Endophthalmitis (1×1 in row4), Stye (2×1) */}
+            <motion.div className="dp2-bento-card dp2-bento-c5"
+              style={{ '--card-bg': '#1A1A1A' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.24 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#cef26d' }}><FlameKindling size={26} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#fff' }}>Hypertensive Retinopathy</h4>
+                <p style={{ color: '#fff', opacity: 0.55 }}>Retinal vessel damage caused by sustained high blood pressure.</p>
+              </div>
+            </motion.div>
+
+            <motion.div className="dp2-bento-card dp2-bento-c6"
+              style={{ '--card-bg': '#fff7ed' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.30 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#c2410c' }}><Flame size={26} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#c2410c' }}>Uveitis</h4>
+                <p style={{ color: '#c2410c', opacity: 0.65 }}>Inflammatory condition of the uveal tract of the eye.</p>
+              </div>
+            </motion.div>
+
+            <motion.div className="dp2-bento-card dp2-bento-c7"
+              style={{ '--card-bg': '#f3f6ff' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.36 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#3770bf' }}><Glasses size={28} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#3770bf' }}>Refractive Errors</h4>
+                <p style={{ color: '#3770bf', opacity: 0.65 }}>Myopia, hyperopia, astigmatism & presbyopia corrections.</p>
+              </div>
+            </motion.div>
+
+            <motion.div className="dp2-bento-card dp2-bento-c8"
+              style={{ '--card-bg': '#e8f8f0' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.42 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#065f46' }}><Droplets size={24} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#065f46' }}>Conjunctivitis</h4>
+                <p style={{ color: '#065f46', opacity: 0.65 }}>Infection or inflammation of the conjunctival membrane.</p>
+              </div>
+            </motion.div>
+
+            <motion.div className="dp2-bento-card dp2-bento-c9"
+              style={{ '--card-bg': '#374151' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.48 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#8dc2ff' }}><Microscope size={26} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#fff' }}>Endophthalmitis</h4>
+                <p style={{ color: '#fff', opacity: 0.55 }}>Severe intraocular infection requiring urgent intervention.</p>
+              </div>
+            </motion.div>
+
+            <motion.div className="dp2-bento-card dp2-bento-c10"
+              style={{ '--card-bg': '#fef9c3' }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.54 }}
+              whileHover={{ y: -4 }}>
+              <div className="dp2-bento-icon" style={{ color: '#92400e' }}><Bug size={22} /></div>
+              <div className="dp2-bento-body">
+                <h4 style={{ color: '#92400e' }}>Stye</h4>
+                <p style={{ color: '#92400e', opacity: 0.65 }}>Bacterial infection of the eyelid gland causing a tender lump.</p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
 
       {/* ═══════ SECTION 5 — JOURNEY MAP ═══════ */}
+      <DotDissolve topColor="#f3f6ff" bottomColor="#e8efff" />
       <section className="dp2-journey">
         <div className="dp2-journey-inner">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
@@ -438,6 +537,7 @@ export default function DoctorProfile() {
 
 
       {/* ═══════ BOTTOM — Accordions + Contact ═══════ */}
+      <DotDissolve topColor="#e8efff" bottomColor="#f3f6ff" variant="up" />
       <section className="dp2-bottom">
         <div className="dp2-bottom-inner">
           <div className="dp2-bottom-grid">
@@ -482,14 +582,14 @@ export default function DoctorProfile() {
               <div className="dp2-contact-card">
                 <h3>Get in Touch</h3>
                 <div className="dp2-cc-row">
-                  <Phone size={18} color={C.herb} />
+                  <Phone size={18} color={C.harbor} />
                   <div>
                     <small>Phone</small>
                     <p>{doctor.phone}</p>
                   </div>
                 </div>
                 <div className="dp2-cc-row">
-                  <Building2 size={18} color={C.ice} />
+                  <Building2 size={18} color={C.harbor} />
                   <div>
                     <small>Hospital</small>
                     <p>{doctor.hospital?.name}</p>
