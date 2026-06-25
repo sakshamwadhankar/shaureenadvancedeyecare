@@ -1,5 +1,6 @@
 import React from 'react';
 import Reveal from './Reveal';
+import EquipmentCarousel from './EquipmentCarousel';
 import { Eye, Stethoscope, Microscope, Hospital } from 'lucide-react';
 
 export default function WhyUs() {
@@ -10,23 +11,13 @@ export default function WhyUs() {
         <div className="bento-left">
           {/* Experts Card */}
           <Reveal direction="right" delay={100} className="bento-card bento-experts">
-            <div className="experts-content">
+            <div className="experts-content" style={{ position: 'relative', zIndex: 10, pointerEvents: 'none' }}>
               <h2>15+</h2>
               <p>Advanced<br/>Equipments</p>
-              <div className="plus-btn">+</div>
+              <div className="plus-btn" style={{ pointerEvents: 'auto' }}>+</div>
             </div>
-            <div className="concentric-circles">
-              <div className="circle circle-1">
-                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=100" alt="Equipment" className="avatar av-1" />
-              </div>
-              <div className="circle circle-2">
-                <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=100" alt="Equipment" className="avatar av-2" />
-                <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=100" alt="Equipment" className="avatar av-3" />
-              </div>
-              <div className="circle circle-3">
-                <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=100" alt="Equipment" className="avatar av-4" />
-                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=100" alt="Equipment" className="avatar av-5" />
-              </div>
+            <div className="experts-carousel-container" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 }}>
+              <EquipmentCarousel />
             </div>
           </Reveal>
 
