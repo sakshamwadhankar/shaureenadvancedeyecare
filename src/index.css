@@ -66,11 +66,21 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-primary);
+    -webkit-text-size-adjust: 100%;
+}
+
+#root {
     overflow-x: hidden;
+    width: 100%;
 }
 
 h1, h2, h3 {
@@ -1886,7 +1896,7 @@ h1, h2, h3 {
 
     /* Hero */
     .hero {
-        min-height: 85vh;
+        min-height: 100vh;
         padding-top: 80px;
     }
 
@@ -2090,7 +2100,7 @@ h1, h2, h3 {
 
     /* Hero */
     .hero {
-        min-height: 80vh;
+        min-height: 100vh;
         padding-top: 70px;
     }
 
@@ -2225,13 +2235,13 @@ h1, h2, h3 {
 
     .case-main-card {
         height: auto;
-        min-height: 300px;
+        min-height: 250px;
         padding: 24px;
     }
 
     .case-card-top h3 {
         font-size: 20px;
-        max-width: 60%;
+        max-width: 100%;
     }
 
     .case-desc {
@@ -2240,9 +2250,7 @@ h1, h2, h3 {
     }
 
     .case-hero-img {
-        width: 50%;
-        height: 100%;
-        opacity: 0.5;
+        display: none;
     }
 
     .stat-pill {
@@ -3375,7 +3383,7 @@ h1, h2, h3 {
         max-width: 500px;
         margin: 0 auto;
     }
-    .dp2-collage-main { width: 260px; height: 350px; left: 50px; }
+    .dp2-collage-main { width: 260px; height: 350px; left: 50%; transform: translateX(-50%); }
     .dp2-skill-node { flex: 0 0 calc(50% - 10px); }
     .dp2-clipping { flex: 0 0 calc(50% - 14px); }
     .dp2-scatter-card { flex: 0 0 calc(33% - 14px); }
@@ -3387,8 +3395,9 @@ h1, h2, h3 {
     .dp2-hero { padding: 60px 20px 0; }
     .dp2-back { left: 20px; top: 16px; }
     .dp2-hero-name { font-size: clamp(32px, 9vw, 50px); }
+    .dp2-collage-stamp { right: auto; left: 50%; transform: translateX(-50%) rotate(12deg); top: -10px; }
     .dp2-collage { height: 360px; }
-    .dp2-collage-main { width: 220px; height: 300px; left: 30px; }
+    .dp2-collage-main { width: 220px; height: 300px; left: 50%; transform: translateX(-50%); }
     .dp2-collage-polaroid { display: none; }
     .dp2-hero-stats-strip { flex-direction: column; }
     .dp2-stat-block { border-right: none; border-bottom: 1px solid #e5e7eb; width: 100%; }
