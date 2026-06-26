@@ -94,40 +94,89 @@ export const doctors = [
     }
   },
   {
-    id: "demo",
-    name: "Dr. Demo Specialist",
-    qualifications: "MD, FRCS (Ophthalmology)",
-    specialisation: "Cornea & Anterior Segment",
-    experience: "15+",
-    practisingSince: 2010,
-    phone: "0712 1234567",
-    image: "https://images.unsplash.com/photo-1594824432258-2936a7d57fa4?auto=format&fit=crop&q=80&w=800",
+    id: "sonal",
+    name: "Dr. Sonal Shamik Ambatkar",
+    qualifications: "MBBS, DNB (Ophthalmology)",
+    specialisation: "Glaucoma Services & Cataract Surgery",
+    experience: "20+",
+    practisingSince: 2002,
+    phone: "09423638101",
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800",
     coverImage: "https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&q=80&w=1200",
-    about: "Dr. Demo Specialist is an experienced ophthalmologist specializing in Cornea and Anterior Segment surgeries. With over 15 years of experience, they provide comprehensive eye care and have performed thousands of successful procedures.",
+    about: "Dr. Sonal Shamik Ambatkar is a highly experienced Consultant Ophthalmologist specializing in Glaucoma Services. She trained at the prestigious Aravind-Zeiss Centre of Excellence, Aravind Eye Hospital, under Dr. R Ramakrishnan. She is an expert in high-volume cataract surgeries, having performed over 12,000 manual small incision cataract surgeries, alongside advanced glaucoma management, phacoemulsification, and anterior segment laser procedures.",
+    
+    specializations: [
+      { title: "Glaucoma Surgeries", description: "Advanced medical and surgical management of glaucoma to prevent optic nerve damage." },
+      { title: "Manual SICS", description: "High-volume expert in manual small-incision cataract surgeries with over 12,000 successful procedures." },
+      { title: "Phacoemulsification", description: "Modern ultrasound-based cataract removal for faster recovery and better visual outcomes." },
+      { title: "Anterior Segment Laser", description: "Laser procedures for various anterior segment conditions including post-cataract opacification and glaucoma." },
+      { title: "Orbital & Anterior Segment Surgeries", description: "Comprehensive surgical care for orbital and various anterior segment disorders." }
+    ],
+
+    education: [
+      { degree: "MBBS", institution: "Government Medical College", year: 1996, location: "Nagpur" },
+      { degree: "DNB (Ophthalmology)", institution: "Aravind Eye Hospital", year: 2002, location: "Tirunelveli" }
+    ],
+
+    experienceTimeline: [
+      { role: "Medical Officer", institution: "Aravind Eye Hospital", period: "May 2002 – Nov 2002", description: "Attended general Ophthalmology OPD and OR. Conducted free camps under the aegis of Aravind Eye Hospital." },
+      { role: "Consultant, Glaucoma Services", institution: "Aravind-Zeiss Centre of Excellence, Aravind Eye Hospital", period: "Dec 2002 – June 2005", description: "Underwent specialized training in Glaucoma under Dr. R Ramakrishnan. Performed high-volume cataract and glaucoma surgeries." },
+      { role: "Consultant Ophthalmologist", institution: "Shaureen Advanced Eye Care Hospital", period: "Jan 2007 – Present", description: "Providing comprehensive eye care specializing in glaucoma and advanced cataract surgeries." }
+    ],
+
     fellowships: [
-      "Fellowship in Cornea, Demo Eye Institute (USA)",
-      "Advanced Anterior Segment Surgery Certification"
+      "Training in Glaucoma under Dr. R Ramakrishnan, Aravind Eye Hospital, Tirunelveli"
     ],
+
     accreditations: [
-      "Member, International Society of Refractive Surgery",
-      "Member, Regional Ophthalmic Association"
+      "Member, Glaucoma Society of India",
+      "Member, Vidarbha Ophthalmic Society",
+      "Member, Nagpur Academy of Ophthalmologists",
+      "Member, Academy of Medical Sciences, Nagpur",
+      "Member, Rotary club of vision",
+      "Organising committee of Tamil Nadu Ophthalmic Association Conference 2004 held at Tirunelveli",
+      "Organising committee of Annual Glaucoma Society of India conference 2003 held at Tirunelveli"
     ],
+
+    publications: [
+      { title: "OCT of RNFL layer in normal and glaucoma population", journal: "Indian Journal of Ophthalmology" },
+      { title: "Original article on OCT (Optical Coherence Tomography)", journal: "Journal of Tamil Nadu Ophthalmic Association" },
+      { title: "Original article on Central Corneal Thickness in Glaucoma", journal: "Journal of Bombay Ophthalmic Association" },
+      { title: "Chapter on Phacoemulsification in Glaucomatous eyes", journal: "L C Dutta textbook of Ophthalmology" },
+      { title: "Chapter on Tonometry", journal: "Recent advances in Ophthalmology by Nema" }
+    ],
+
+    presentations: [
+      "Annual Glaucoma Society of India conference 2003: Presented free paper on association of Retinal Nerve Fibre Layer thickness and Macular thickness by OCT.",
+      "Instruction course on Optical Coherence Tomography in Annual Tamil Nadu Ophthalmic Association Conference 2004.",
+      "Invited as guest faculty at CME 2005 of Nagpur Academy of Ophthalmology."
+    ],
+
+    journeyLocations: [
+      { city: "Nagpur", country: "India", x: 62, y: 52, label: "Government Medical College", period: "1996" },
+      { city: "Tirunelveli", country: "India", x: 58, y: 82, label: "Aravind Eye Hospital — DNB & Glaucoma Services", period: "1998–2005" },
+      { city: "Nagpur", country: "India", x: 62, y: 52, label: "Shaureen Advanced Eye Care", period: "2007–Present" }
+    ],
+
     ailments: [
-      "Dry Eye Syndrome",
-      "Keratoconus",
-      "Corneal Ulcers",
-      "Pterygium",
-      "Refractive Errors"
+      "Glaucoma",
+      "Cataract",
+      "Refractive Errors",
+      "Anterior Segment Disorders",
+      "Orbital Diseases"
     ],
+    
     training: [
-      "MD: Demo Medical College, 2008",
-      "Corneal Surgery Masterclass, 2012"
+      "MBBS: Government Medical College. 1996.",
+      "DNB (Opthalmology): Aravind Eye Hospital, Tirunelveli. 2002.",
+      "Training in Glaucoma: Aravind Eye Hospital, Tirunelveli."
     ],
+
     hospital: {
-      name: "Demo Vision Care Center",
-      address: "Demo Square, Nagpur - 440010, Maharashtra",
-      facilities: ["Topography", "Specular Microscopy", "Excimer Laser", "Corneal Cross-linking"],
-      timings: "Mon - Fri: 9am - 5pm"
+      name: "Shaureen Advanced Eye Care Hospital",
+      address: "Bhavani Chambers, Ajni Square, Wardha Road, Nagpur - 440015, Maharashtra",
+      facilities: ["Perimetry", "A-Scan Biometry", "YAG Laser", "OCT", "Phaco IOL", "Glaucoma Surgeries", "Anterior Segment Laser"],
+      timings: "Mon - Sat: By Appointment | Sun: Closed"
     }
   }
 ];

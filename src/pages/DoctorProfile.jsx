@@ -76,6 +76,9 @@ export default function DoctorProfile() {
   }
 
   const yrs = new Date().getFullYear() - (doctor.practisingSince || 2001);
+  const nameParts = doctor.name.split(' ');
+  const lastName = nameParts.pop();
+  const firstNames = nameParts.join(' ');
 
   return (
     <div className="dp2-page">
@@ -98,7 +101,7 @@ export default function DoctorProfile() {
             <motion.div className="dp2-collage-main"
               initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}>
-              <img src={drImg} alt="Dr. Shamik A. Ambatkar" />
+              <img src={doctor.image || drImg} alt={doctor.name} />
               <div className="dp2-collage-main-border" />
             </motion.div>
 
@@ -120,7 +123,7 @@ export default function DoctorProfile() {
               <div className="dp2-polaroid-img-fill">
                 <Eye size={28} color={C.harbor} />
               </div>
-              <p>Vitreo-Retinal<br/>Surgery</p>
+              <p style={{textAlign: 'center', lineHeight: '1.2', fontSize: '0.85rem', fontWeight: '600'}}>{doctor.specialisation}</p>
             </motion.div>
 
             {/* Stamp */}
@@ -140,19 +143,18 @@ export default function DoctorProfile() {
             <p className="dp2-hero-eyebrow">The Portfolio of</p>
 
             <h1 className="dp2-hero-name">
-              Dr. Shamik<br/>
-              <span className="dp2-hero-name-accent">A. Ambatkar</span>
+              {firstNames}<br/>
+              <span className="dp2-hero-name-accent">{lastName}</span>
             </h1>
 
             <div className="dp2-hero-quals-line">
-              <span className="dp2-tag-herb"><Award size={13} /> MBBS</span>
-              <span className="dp2-tag-herb"><Award size={13} /> DNB (Ophthalmology)</span>
+              {doctor.qualifications.split(',').map((q, idx) => (
+                <span key={idx} className="dp2-tag-herb"><Award size={13} /> {q.trim()}</span>
+              ))}
             </div>
 
             <p className="dp2-hero-intro">
-              A premier Vitreo-Retinal Surgeon based in Nagpur at <em>Shaureen Advanced Eye Care Hospital</em>. 
-              Trained at the legendary Aravind Eye Hospital under Dr. P Namperumalsamy, 
-              with international fellowship credentials from London.
+              {doctor.about}
             </p>
 
             <div className="dp2-hero-stats-strip">

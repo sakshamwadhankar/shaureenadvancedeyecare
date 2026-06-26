@@ -36,16 +36,16 @@ export default function Services() {
 
         {/* Right Card */}
         <Reveal direction="left" delay={300} className="services-card peach-theme cursor-pointer hover:scale-105 transition-transform duration-300">
-          <Link to="/doctor/demo" className="flex items-end justify-center w-full h-full">
+          <Link to="/doctor/sonal" className="flex items-end justify-center w-full h-full">
             <div className="services-card-bg-wrapper">
-               <img src={optImg} alt="Expert Optometrists" />
+               <img src={optImg} alt="Dr. Sonal Shamik Ambatkar" />
             </div>
             <div className="glass-panel">
               <div className="glass-top">
                  <span className="pill-badge">Specialized Care</span>
               </div>
               <div className="glass-middle">
-                 <h3 className="card-doctor-name">Expert Optometrists</h3>
+                 <h3 className="card-doctor-name">Dr. Sonal Ambatkar</h3>
               </div>
             </div>
           </Link>
